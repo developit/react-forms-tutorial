@@ -1,8 +1,12 @@
 // src/components/SubmitButton.js
-import React, { PropTypes } from 'react';
-import RaisedButton from 'material-ui/lib/raised-button';
 
-export default React.createClass({
+import preact from 'preact';
+
+import PropTypes from 'proptypes';
+
+import { createComponent } from '../util.js';
+
+export default createComponent({
 
   displayName: 'SubmitButton',
 
@@ -23,11 +27,9 @@ export default React.createClass({
 
   render() {
     return (
-      <RaisedButton
-        primary
-        disabled={!this.context.isFormValid()}
-        label={this.props.label}
-        onTouchTap={this.context.submit}/>
+      <button disabled={!this.context.isFormValid()}>
+        {this.props.label}
+      </button>
     );
   }
 });

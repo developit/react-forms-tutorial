@@ -1,9 +1,9 @@
 // demo.js
-import React from 'react';
-import ReactDOM from 'react-dom';
+import preact from 'preact';
+
 import Form, {Text, SubmitButton} from './src/index';
 
-ReactDOM.render((
+preact.render((
   <Form onSubmit={data => console.log(data)}>
     <Text
       name="name"

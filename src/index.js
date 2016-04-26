@@ -1,5 +1,8 @@
 // src/index.js
-import React, {PropTypes} from 'react';
+import preact from 'preact';
+
+import PropTypes from 'proptypes';
+
 import { createStore, applyMiddleware, compose } from 'redux';
 import { connect } from 'react-redux';
 import { Provider } from 'react-redux';
@@ -8,9 +11,6 @@ import createLogger from 'redux-logger';
 import Form from './components/Form';
 import * as actions from './actions';
 import store from './store';
-import injectTapEventPlugin from 'react-tap-event-plugin';
-
-injectTapEventPlugin();
 
 const SmartForm = connect(state => state, actions)(Form);
 

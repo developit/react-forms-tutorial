@@ -1,8 +1,12 @@
-import React, { PropTypes } from 'react';
-import TextField from 'material-ui/lib/text-field';
+import preact from 'preact';
+
+import PropTypes from 'proptypes';
+
+import { createComponent } from '../util.js';
+
 import * as validators from '../validators';
 
-export default React.createClass({
+export default createComponent({
 
   displayName: 'Text',
 
@@ -18,9 +22,9 @@ export default React.createClass({
     values: PropTypes.object.isRequired,
     registerValidation: PropTypes.func.isRequired
   },
-  
+
   componentWillMount() {
-    this.removeValidationFromContext = this.context.registerValidation(show => 
+    this.removeValidationFromContext = this.context.registerValidation(show =>
       this.isValid(show));
   },
 
@@ -33,7 +37,7 @@ export default React.createClass({
       validate: []
     }
   },
-  
+
   getInitialState() {
     return {
       errors: []
@@ -54,7 +58,7 @@ export default React.createClass({
 
   isValid(showErrors) {
     const errors = this.props.validate
-      .reduce((memo, currentName) => 
+      .reduce((memo, currentName) =>
         memo.concat(validators[currentName](
           this.context.values[this.props.name]
         )), []);
@@ -72,20 +76,15 @@ export default React.createClass({
   },
 
   render() {
+    console.log('HII');
     return (
       <div>
-      <TextField
-        hintText={this.props.placeholder}
-        floatingLabelText={this.props.label}
-        value={this.context.values[this.props.name]}
+      <input
+        type="text"
         onChange={this.onChange}
         onBlur={this.onBlur}
-        errorText={this.state.errors.length ? (
-          <div>
-            {this.state.errors.map((error, i) => <div key={i}>{error}</div>)}
-          </div>
-        ) : null}/>
-        </div>
+        value={this.context.values[this.props.name]} />
+      </div>
     );
   }
 });

@@ -10,6 +10,12 @@ module.exports = {
     path: path.resolve('./dist'), //save result in 'dist' folder
     filename: 'demo.js'
   },
+  resolve: {
+    alias: {
+      'react': 'preact-compat',
+      'react-dom': 'preact-compat'
+    }
+  },
   module: {
     loaders: [
       { //transpile ES2015 with JSX into ES5
@@ -17,7 +23,15 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel',
         query: {
-          presets: ['react', 'es2015']
+          presets: ['es2015'],
+          "plugins": [
+            [
+              "transform-react-jsx",
+              {
+                "pragma": "preact.h"
+              }
+            ]
+          ]
         }
       }
     ]

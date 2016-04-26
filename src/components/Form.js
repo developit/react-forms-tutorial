@@ -1,11 +1,17 @@
 // src/components/Form.js
-import React, {PropTypes} from 'react';
+// import React, {PropTypes} from 'react';
+import preact from 'preact';
+
+import PropTypes from 'proptypes';
+
+import { createComponent } from '../util.js';
+
 import without from 'lodash.without';
 import assign from 'lodash.assign';
 
 const noop = () => undefined;
 
-export default React.createClass({
+export default createComponent({
   displayName: 'Form',
 
   propTypes: {
@@ -43,7 +49,7 @@ export default React.createClass({
   },
 
   isFormValid(showErrors) {
-    return this.validations.reduce((memo, isValidFunc) => 
+    return this.validations.reduce((memo, isValidFunc) =>
       isValidFunc(showErrors) && memo, true);
   },
 
@@ -66,6 +72,7 @@ export default React.createClass({
   },
 
   render() {
+    console.log(this.props.children);
     return (
       <form>
         {this.props.children}
